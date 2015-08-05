@@ -1,0 +1,174 @@
+{
+  "postnumre": {
+    "types": {
+      "nr": "integer NOT NULL",
+      "navn": "VARCHAR(20) NOT NULL",
+      "stormodtager": "boolean NOT NULL DEFAULT false"
+    },
+    "primary": [
+      "nr"
+    ]
+  },
+  "vejstykker": {
+    "types": {
+      "kode": "integer NOT NULL",
+      "kommunekode": "integer NOT NULL",
+      "oprettet": "timestamp",
+      "ændret": "timestamp",
+      "navn": "VARCHAR(255) NOT NULL",
+      "adresseringsnavn": "VARCHAR(255)"
+    },
+    "primary": [
+      "kommunekode",
+      "kode"
+    ]
+  },
+  "adgangsadresser": {
+    "types": {
+      "id": "uuid NOT NULL",
+      "status": "integer NOT NULL",
+      "oprettet": "timestamp",
+      "ændret": "timestamp",
+      "ikrafttrædelsesdato": "timestamp",
+      "kommunekode": "INTEGER NOT NULL",
+      "vejkode": "INTEGER NOT NULL",
+      "husnr": "VARCHAR(6) NOT NULL",
+      "supplerendebynavn": "VARCHAR(34) NULL",
+      "postnr": "INTEGER NULL",
+      "ejerlavkode": "INTEGER",
+      "matrikelnr": "VARCHAR(7) NULL",
+      "esrejendomsnr": "integer NULL",
+      "etrs89koordinat_øst": "double precision NULL",
+      "etrs89koordinat_nord": "double precision NULL",
+      "nøjagtighed": "CHAR(1) NULL",
+      "kilde": "integer NULL",
+      "husnummerkilde": "VARCHAR(6) NOT NULL",
+      "tekniskstandard": "CHAR(2) NULL",
+      "tekstretning": "float4 NULL",
+      "adressepunktændringsdato": "timestamp NULL",
+      "esdhreference": "VARCHAR(255)",
+      "journalnummer": "VARCHAR(255)"
+    },
+    "primary": [
+      "id"
+    ]
+  },
+  "adresser": {
+    "types": {
+      "id": "uuid NOT NULL",
+      "status": "integer NOT NULL",
+      "oprettet": "timestamp",
+      "ændret": "timestamp",
+      "ikrafttrædelsesdato": "timestamp",
+      "adgangsadresseid": "UUID NOT NULL",
+      "etage": "VARCHAR(3)",
+      "dør": "VARCHAR(4)",
+      "kilde": "integer NULL",
+      "esdhreference": "VARCHAR(255)",
+      "journalnummer": "VARCHAR(255)"
+    },
+    "primary": [
+      "id"
+    ]
+  },
+  "ejerlav": {
+    "types": {
+      "kode": "INTEGER",
+      "navn": "VARCHAR(255) NOT NULL"
+    },
+    "primary": [
+      "kode"
+    ]
+  },
+  "regionstilknytninger": {
+    "types": {
+      "adgangsadresseid": "UUID NOT NULL",
+      "regionskode": "INTEGER NOT NULL"
+    },
+    "primary": [
+      "adgangsadresseid"
+    ]
+  },
+  "kommunetilknytninger": {
+    "types": {
+      "adgangsadresseid": "UUID NOT NULL",
+      "kommunekode": "INTEGER NOT NULL"
+    },
+    "primary": [
+      "adgangsadresseid"
+    ]
+  },
+  "postnummertilknytninger": {
+    "types": {
+      "adgangsadresseid": "UUID NOT NULL",
+      "postnummer": "INTEGER NOT NULL"
+    },
+    "primary": [
+      "adgangsadresseid"
+    ]
+  },
+  "sognetilknytninger": {
+    "types": {
+      "adgangsadresseid": "UUID NOT NULL",
+      "sognekode": "INTEGER NOT NULL"
+    },
+    "primary": [
+      "adgangsadresseid"
+    ]
+  },
+  "retskredstilknytninger": {
+    "types": {
+      "adgangsadresseid": "UUID NOT NULL",
+      "retskredskode": "INTEGER NOT NULL"
+    },
+    "primary": [
+      "adgangsadresseid"
+    ]
+  },
+  "politikredstilknytninger": {
+    "types": {
+      "adgangsadresseid": "UUID NOT NULL",
+      "politikredskode": "INTEGER NOT NULL"
+    },
+    "primary": [
+      "adgangsadresseid"
+    ]
+  },
+  "opstillingskredstilknytninger": {
+    "types": {
+      "adgangsadresseid": "UUID NOT NULL",
+      "opstillingskredskode": "INTEGER NOT NULL"
+    },
+    "primary": [
+      "adgangsadresseid"
+    ]
+  },
+  "valglandsdelstilknytninger": {
+    "types": {
+      "adgangsadresseid": "UUID NOT NULL",
+      "valglandsdelsbogstav": "INTEGER NOT NULL"
+    },
+    "primary": [
+      "adgangsadresseid"
+    ]
+  },
+  "zonetilknytninger": {
+    "types": {
+      "adgangsadresseid": "UUID NOT NULL",
+      "zone": "INTEGER NOT NULL"
+    },
+    "primary": [
+      "adgangsadresseid"
+    ]
+  },
+  "jordstykketilknytninger": {
+    "types": {
+      "adgangsadresseid": "UUID NOT NULL",
+      "ejerlavkode": "INTEGER NOT NULL",
+      "matrikelnr": "INTEGER NOT NULL"
+    },
+    "primary": [
+      "adgangsadresseid"
+    ]
+  }
+}

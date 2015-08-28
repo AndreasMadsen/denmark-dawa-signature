@@ -17,52 +17,49 @@ signature = require('denmark-dawa-signature')
 [DAWA (Danmarks Adressers Web API)](http://dawa.aws.dk/) is a service provided
 by the danish government, which exposes multiply APIs for getting address
 related information. The service supports replication of its tables,
-this module finds information about those tables.
+this module exposes information about those tables.
 
 ```json
-signature[0] = {
-	"href": "http://dawa.aws.dk/replikering/postnumre/haendelser",
-	"name": "postnumre",
-	"attachment": false,
-	"table": [
-		{
+signature.postnumre = {
+	"source": "http://dawa.aws.dk/replikering/postnumre",
+	"schema": {
+		"nr": {
 			"name": "nr",
-			"type": "string",
-			"sqltype": "integer NOT NULL",
-			"unique": true,
-			"optional": false,
 			"description": "Unik identifikation af det postnummeret. Postnumre fastsættes af Post Danmark. Repræsenteret ved fire cifre. Eksempel: ”2400” for ”København NV”.",
-			"deprecated": false
-		},
-		{
-			"name": "navn",
 			"type": "string",
-			"sqltype": "VARCHAR(20) NOT NULL",
-			"unique": false,
-			"optional": false,
-			"description": "Det navn der er knyttet til postnummeret, typisk byens eller bydelens navn. Repræsenteret ved indtil 20 tegn. Eksempel: ”København NV”.",
+			"required": true,
+			"postgresql": "INTEGER",
+			"primary": true,
 			"deprecated": false
 		},
-		{
+		"navn": {
+			"name": "navn",
+			"description": "Det navn der er knyttet til postnummeret, typisk byens eller bydelens navn. Repræsenteret ved indtil 20 tegn. Eksempel: ”København NV”.",
+			"type": "string",
+			"required": true,
+			"postgresql": "VARCHAR(20)",
+			"primary": false,
+			"deprecated": false
+		},
+		"stormodtager": {
 			"name": "stormodtager",
-			"type": "boolean",
-			"sqltype": "boolean NOT NULL DEFAULT false",
-			"unique": false,
-			"optional": false,
 			"description": "Hvorvidt postnummeret er en særlig type, der er tilknyttet en organisation der modtager en større mængde post.",
+			"type": "boolean",
+			"required": true,
+			"postgresql": "BOOLEAN",
+			"primary": false,
 			"deprecated": false
 		}
-	]
+	}
 };
 ```
 
 ## Source
 
-Most of the information is from http://dawa.aws.dk/replikeringdok. The SQL type
-information is from https://github.com/DanmarksAdresser/Dawa/blob/master/doc/databasemodel.md,
-but for some of it I had to guess. Thus this depends on a static json file in
-this repository.
-_(I will look into making a pull request to DAWA, such the information is added to their tables)_
+I made a [pull request to DAWA](https://github.com/DanmarksAdresser/Dawa/pull/417) that exposes
+this information. But it hasn't yet gone into production. This module
+has a copy of the information in `download.json`. When my pull requests
+goes into production, I will change the module such it fetches it on install.
 
 ##License
 

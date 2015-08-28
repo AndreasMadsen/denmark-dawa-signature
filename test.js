@@ -3,10 +3,17 @@
 'use strict';
 'use strong';
 
-const signature = require('./index.json');
+const signature = require('./schema.json');
 const test = require('tap').test;
 
 test('count tables', function (t) {
-  t.equal(signature.length, 15);
+  t.deepEqual(Object.keys(signature), [
+    'postnumre', 'vejstykker', 'adgangsadresser',
+    'adresser', 'ejerlav', 'regionstilknytninger',
+    'kommunetilknytninger', 'postnummertilknytninger',
+    'sognetilknytninger', 'politikredstilknytninger',
+    'opstillingskredstilknytninger', 'valglandsdelstilknytninger',
+    'zonetilknytninger', 'jordstykketilknytninger'
+  ]);
   t.end();
 });

@@ -21,6 +21,7 @@ this module exposes information about those tables.
 
 ```json
 signature.postnumre = {
+	"name": "postnumre",
 	"source": "http://dawa.aws.dk/replikering/postnumre",
 	"schema": {
 		"nr": {

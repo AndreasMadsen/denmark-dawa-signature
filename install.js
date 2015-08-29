@@ -27,6 +27,7 @@ for (const name of Object.keys(json)) {
   }
 
   schemas[name] = {
+    name: name,
     source: json[name].source,
     schema: schema
   };

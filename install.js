@@ -2,39 +2,57 @@
 'use strict';
 'use strong';
 
+const endpoint = require('endpoint');
 const path = require('path');
+const http = require('http');
 const fs = require('fs');
 
-const json = JSON.parse(
-  fs.readFileSync(path.resolve(__dirname, 'download.json'))
-);
-const schemas = {};
+download(function (err, json) {
+  if (err) throw err;
+  save(format(json));
+});
 
-for (const name of Object.keys(json)) {
-  // Get the data item, containing the table collum information
-  let properties;
-  for (const item of json[name].schema) {
-    if (item.name === 'data') {
-      properties = item.properties;
-      break;
-    }
-  }
-
-  // Unpack properties
-  const schema = {};
-  for (const property of properties) {
-    schema[property.name] = property;
-  }
-
-  schemas[name] = {
-    name: name,
-    source: json[name].source,
-    schema: schema
-  };
+function download(callback) {
+  http.get('http://dawa.aws.dk/replikeringdok/schema.json', function (res) {
+    res.pipe(endpoint(function (err, content) {
+      if (err) return callback(null, null);
+      callback(null, JSON.parse(content));
+    }));
+  });
 }
 
-// Save schema
-fs.writeFileSync(
-  path.resolve(__dirname, 'schema.json'),
-  JSON.stringify(schemas, null, 2)
-);
+function format(json) {
+  const schemas = {};
+
+  for (const name of Object.keys(json)) {
+    // Get the data item, containing the table collum information
+    let properties;
+    for (const item of json[name].schema) {
+      if (item.name === 'data') {
+        properties = item.properties;
+        break;
+      }
+    }
+
+    // Unpack properties
+    const schema = {};
+    for (const property of properties) {
+      schema[property.name] = property;
+    }
+
+    schemas[name] = {
+      name: name,
+      source: json[name].source,
+      schema: schema
+    };
+  }
+
+  return schemas;
+}
+
+function save(schemas) {
+  fs.writeFileSync(
+    path.resolve(__dirname, 'schema.json'),
+    JSON.stringify(schemas, null, 2)
+  );
+}

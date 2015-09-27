@@ -58,9 +58,7 @@ signature.postnumre = {
 ## Source
 
 I made a [pull request to DAWA](https://github.com/DanmarksAdresser/Dawa/pull/417) that exposes
-this information. But it hasn't yet gone into production. This module
-has a copy of the information in `download.json`. When my pull requests
-goes into production, I will change the module such it fetches it on install.
+this information. The schema can now be found on http://dawa.aws.dk/replikeringdok/schema.json.
 
 ##License
 

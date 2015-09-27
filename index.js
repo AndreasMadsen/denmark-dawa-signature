@@ -5,20 +5,16 @@
 const endpoint = require('endpoint');
 const path = require('path');
 const http = require('http');
-const fs = require('fs');
-
-download(function (err, json) {
-  if (err) throw err;
-  save(format(json));
-});
 
 function download(callback) {
-  http.get('http://dawa.aws.dk/replikeringdok/schema.json', function (res) {
+  const req = http.get('http://dawa.aws.dk/replikeringdok/schema.json', function (res) {
     res.pipe(endpoint(function (err, content) {
       if (err) return callback(null, null);
       callback(null, JSON.parse(content));
     }));
   });
+
+  req.once('error', callback);
 }
 
 function format(json) {
@@ -50,9 +46,10 @@ function format(json) {
   return schemas;
 }
 
-function save(schemas) {
-  fs.writeFileSync(
-    path.resolve(__dirname, 'schema.json'),
-    JSON.stringify(schemas, null, 2)
-  );
+function dawaSignature(callback) {
+  download(function (err, json) {
+    if (err) return callback(err);
+    callback(null, format(json));
+  });
 }
+module.exports = dawaSignature;

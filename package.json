@@ -1,13 +1,12 @@
 {
   "name": "denmark-dawa-signature",
   "description": "Get signature information for the DAWA replication tables.",
-  "version": "2.2.1",
+  "version": "3.0.0",
   "author": "Andreas Madsen <amwebdk@gmail.com>",
   "scripts": {
-    "test": "tap test.js",
-    "install": "node --strong_mode install.js"
+    "test": "tap test.js"
   },
-  "main": "./schema.json",
+  "main": "./index.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/AndreasMadsen/denmark-dawa-signature.git"

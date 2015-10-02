@@ -1,7 +1,7 @@
 {
-  "name": "denmark-dawa-signature",
-  "description": "Get signature information for the DAWA replication tables.",
-  "version": "3.0.0",
+  "name": "denmark-dawa-schema",
+  "description": "Get schema information for the DAWA replication tables.",
+  "version": "1.0.0",
   "author": "Andreas Madsen <amwebdk@gmail.com>",
   "scripts": {
     "test": "tap test.js"
@@ -9,18 +9,18 @@
   "main": "./index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/AndreasMadsen/denmark-dawa-signature.git"
+    "url": "git://github.com/denmark-io/denmark-dawa-schema.git"
   },
   "keywords": [
     "Danmarks Adressers Web API",
     "DAWA",
-    "signature"
+    "schema"
   ],
   "dependencies": {
     "endpoint": "0.4.x"
   },
   "devDependencies": {
-    "tap": "1.4.x"
+    "tap": "2.x.x"
   },
   "license": "MIT"
 }

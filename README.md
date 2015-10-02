@@ -1,17 +1,17 @@
-#denmark-dawa-signature  [![Build Status](https://travis-ci.org/denmark-io/denmark-dawa-signature.svg?branch=master)](https://travis-ci.org/denmark-io/denmark-dawa-signature)
+#denmark-dawa-schema  [![Build Status](https://travis-ci.org/denmark-io/denmark-dawa-schema.svg?branch=master)](https://travis-ci.org/denmark-io/denmark-dawa-schema)
 
-> Get signature information for the DAWA replication tables
+> Get schema information for the DAWA replication tables
 
 ## Installation
 
 ```sheel
-npm install denmark-dawa-signature
+npm install denmark-dawa-schema
 ```
 
 ## Documentation
 
 ```javascript
-signature = require('denmark-dawa-signature')
+schema = require('denmark-dawa-schema')
 ```
 
 [DAWA (Danmarks Adressers Web API)](http://dawa.aws.dk/) is a service provided
@@ -20,10 +20,10 @@ related information. The service supports replication of its tables,
 this module exposes information about those tables.
 
 ```javascript
-signature(function (err, schema) {
+schema(function (err, info) {
 	if (err) throw err;
 
-	schema.postnumre = {
+	info.postnumre = {
 		"name": "postnumre",
 		"source": "http://dawa.aws.dk/replikering/postnumre",
 		"schema": {

@@ -3,13 +3,13 @@
 'use strict';
 'use strong';
 
-const signature = require('./index.js');
+const schema = require('./index.js');
 const test = require('tap').test;
 
 test('count tables', function (t) {
-  signature(function (err, schema) {
+  schema(function (err, info) {
     t.ifError(err);
-    t.deepEqual(Object.keys(schema), [
+    t.deepEqual(Object.keys(info), [
       'postnumre', 'vejstykker', 'adgangsadresser',
       'adresser', 'ejerlav', 'regionstilknytninger',
       'kommunetilknytninger', 'postnummertilknytninger',

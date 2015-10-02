@@ -46,10 +46,10 @@ function format(json) {
   return schemas;
 }
 
-function dawaSignature(callback) {
+function dawaSchema(callback) {
   download(function (err, json) {
     if (err) return callback(err);
     callback(null, format(json));
   });
 }
-module.exports = dawaSignature;
+module.exports = dawaSchema;
